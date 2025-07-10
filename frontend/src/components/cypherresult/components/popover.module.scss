@@ -1,3 +1,25 @@
+:root {
+  --input-bg: #F8F9FA;
+  --input-text: #2756FF;
+  --input-default-text: #808080;
+  --input-border-hover: #2756FF;
+  --btn-bg: #F8F9FA;
+  --btn-color: #2756FF;
+  --btn-hover-bg: #2756FF;
+  --btn-hover-color: #F8F9FA;
+}
+
+body.dark {
+  --input-bg: #2c2c2c;
+  --input-text: #82aaff;
+  --input-default-text: #aaaaaa;
+  --input-border-hover: #82aaff;
+  --btn-bg: #2c2c2c;
+  --btn-color: #82aaff;
+  --btn-hover-bg: #82aaff;
+  --btn-hover-color: #1a1a1a;
+}
+
 .title {
   font-size: 18px;
   font-weight: bold;
@@ -5,47 +27,45 @@
 .input {
   width: 100%;
   height: 48px;
-  background: #F8F9FA 0% 0% no-repeat padding-box !important;
+  background: var(--input-bg) padding-box !important;
   border-radius: 5px !important;
   opacity: 1 !important;
   border: none;
   margin: 5px 0px 5px 0px;
-  color: #2756FF;
+  color: var(--input-text);
 }
-.input:hover {
-  border: 1px solid #2756FF;
-}
+.input:hover,
 .input:focus {
-  border: 1px solid #2756FF;
+  border: 1px solid var(--input-border-hover);
 }
 .select {
   width: 100%;
   height: 48px;
-  background: #F8F9FA 0% 0% no-repeat padding-box !important;
+  background: var(--input-bg) padding-box !important;
   border-radius: 5px !important;
   opacity: 1 !important;
   border: none;
   margin: 5px 0px 5px 0px;
-  color: #2756FF;
+  color: var(--input-text);
 }
 .default{
   width: 100%;
   height: 48px;
-  background: #F8F9FA 0% 0% no-repeat padding-box !important;
+  background: var(--input-bg) padding-box !important;
   border-radius: 5px !important;
   opacity: 1 !important;
   border: none;
   margin: 5px 0px 5px 0px;
-  color:#808080;
+  color: var(--input-default-text);
 }
 .select select-item {
   width: 100%;
   height: 48px;
-  background: #F8F9FA 0% 0% no-repeat padding-box !important;
+  background: var(--input-bg) padding-box !important;
   border-radius: 5px !important;
   opacity: 1 !important;
   border: none;  
-  color:#808080;
+  color: var(--input-default-text);
 }
 .buttons {
   margin: 32px 0 32px 0;
@@ -57,16 +77,16 @@
   height: 45px;
   font-size: 14px;
   font-weight: bold;
-  border: 1px solid #2756FF;
+  border: 1px solid var(--btn-color);
   border-radius: 10px;
   opacity: 1;
   margin-left: 10px;
   margin-right: 10px;
-  color: #2756FF;
-  background-color: #F8F9FA;
+  color: var(--btn-color);
+  background-color: var(--btn-bg);
 }
 
-.btn:hover {  
-  color: #F8F9FA;
-  background-color: #2756FF;
+.btn:hover {
+  color: var(--btn-hover-color);
+  background-color: var(--btn-hover-bg);
 }
