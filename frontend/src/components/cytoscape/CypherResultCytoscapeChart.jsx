@@ -33,6 +33,7 @@ import {
   faLockOpen,
   faProjectDiagram,
   faWindowClose,
+  faDownload,
 } from '@fortawesome/free-solid-svg-icons';
 import cxtmenu from '../../lib/cytoscape-cxtmenu-bitnine';
 import { initLocation, seletableLayouts } from './CytoscapeLayouts';
@@ -236,12 +237,37 @@ const CypherResultCytoscapeCharts = ({
       }
     }
   }, [cytoscapeObject, cytoscapeLayout]);
+  const cyRef = useRef(null);
+  const cyCallback = useCallback((cy) => {
+    if (!cyRef.current) {
+      cyRef.current = cy;
+    }
+    if (!cytoscapeObject) {
+      setCytoscapeObject(cy);
+    }
+  }, [cytoscapeObject]);
+  const handleFitView = () => {
+    if (cyRef.current) {
+      cyRef.current.fit(undefined, 50);
+    }
+  };
+  const handleExportGraph = () => {
+    if (cyRef.current) {
+      const pngData = cyRef.current.png({
+        full: true,
+        bg: '#ffffff',
+        scale: 2, // high resolution
+      });
 
-  const cyCallback = useCallback((newCytoscapeObject) => {
-    if (cytoscapeObject) return;
-    setCytoscapeObject(newCytoscapeObject);
-  },
-  [cytoscapeObject]);
+      // Create a link and trigger the download
+      const link = document.createElement('a');
+      link.href = pngData;
+      link.download = 'graph-export.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
 
   return (
     <div>
@@ -263,6 +289,20 @@ const CypherResultCytoscapeCharts = ({
           </Button>
         </Modal.Footer>
       </Modal>
+      <div className={styles.zoomControls}>
+        <Button className={styles.zoomButton} onClick={handleFitView}>
+          ⛶
+        </Button>
+        <Button className={styles.zoomButton} onClick={handleZoomIn}>
+          +
+        </Button>
+        <Button className={styles.zoomButton} onClick={handleZoomOut}>
+          -
+        </Button>
+        <Button className={styles.zoomButton} onClick={handleExportGraph}>
+          <FontAwesomeIcon icon={faDownload} />
+        </Button>
+      </div>
     </div>
   );
 };

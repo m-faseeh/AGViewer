@@ -37,6 +37,81 @@
     --theme-color: var(--dark-theme);
     --navbar-color: var(--dark-navbar);
     --sidebar-color: var(--dark-sidebar);
+    --scrollbar-track-color: #2e2e2e;
+    --scrollbar-bg-color: #2e2e2e;
+    --scrollbar-thumb-color: #bd93f9;
+    --sidebar-active-bg: #2a2a2a;
+    --sidebar-active-border: #555555;
+    --sidebar-text-color: #dddddd;
+    --editor-wrapper-bg: #1e1e1e;
+    --editor-bg: #5e68a2; /* softened dark background */
+    --editor-border-color: rgba(255, 255, 255, 0.2);
+    --editor-scroll-border: #444;
+    --editor-icon-color: #cccccc;
+    --item-bg: #1f1f1f;
+    --item-border: #5c8bff;
+    --item-text: #ffffff;
+    --item-hover-bg: #4966d1;
+    --item-hover-border: #4966d1;
+    --item-hover-text: #383333;
+    --property-bg: #333333;
+    --property-border: #333333;
+    --property-text: #ffffff;
+    --property-hover-bg: #4966d1;
+    --property-hover-text: #534848;
+    --btn-link-color: #382d2d; /* light text for dark background */
+    --btn-link-hover-color: #85AFFF; /* soft hover blue */
+    --card-border-color: rgba(255, 255, 255, 0.1); /* subtle light border */
+    --graph-nav-border: rgba(255, 255, 255, 0.2); /* or a darker alternative */
+    --graph-nav-bg-active: #2e2e2e;
+    --nav-link-color: #ccc;
+    --nav-link-bg-active: #1f1f1f;
+    --nav-link-color-active: #616060;
+    --chart-footer-bg: rgba(255, 255, 255, 0.03);
+    --chart-footer-border: rgba(255, 255, 255, 0.2);
+    --frame-head-button-color: #f0f0f0;
+    --legend-bg: rgba(255, 255, 255, 0.05);
+    --legend-border: rgba(255, 255, 255, 0.2); 
+    --selector-bg-darkgrey: #b27373;
+    --selector-border-darkgrey: #b76a6a;
+    --selector-opacity-low: 0.4;
+    --caption-opacity: 0.7;
+    --carousel-control-bg: rgba(255, 255, 255, 0.13);
+    --carousel-control-color: #5a6168;
+    --carousel-indicator-active-bg: rgba(255, 255, 255, 0.13);
+    --carousel-indicator-bg: #5a6168;
+    --runnable-bg: rgba(255, 255, 255, 0.05);
+    --code-bg: rgba(255, 200, 200, 0.05);
+    --pre-bg: #1e1e1e;
+    --code-block-bg: #2a2a2a;
+    --editor-border-color: #555;
+    --editor-bg-image: none; /* Or a darker background pattern if needed */
+
+    --frame-bg: #1e1e1e;
+    --frame-border: rgba(255, 255, 255, 0.2);
+    --frame-header-bg: rgba(255, 255, 255, 0.05);
+    --frame-header-color: #dddddd;
+    --frame-button-color: #bbbbbb;
+    --frame-button-hover: #ffffff;
+    --zoom-bg: rgba(255, 255, 255, 0.15);
+    --zoom-color: #dddddd;
+    --zoom-hover-bg: rgba(255, 255, 255, 0.25);
+    --zoom-hover-color: white;
+    --canvas-bg:#1f1f1f;
+    --menu-bg: rgba(44, 44, 44, 1);
+    --menu-active-bg: rgba(80, 80, 80, 1);
+    --menu-item-color: #ddd;
+
+    --input-bg: #2c2c2c;
+    --input-text: #82aaff;
+    --input-default-text: #aaaaaa;
+    --input-border-hover: #82aaff;
+    --cypher-table-text-color: #6b6969;
+    --btn-bg: #2c2c2c;
+    --btn-color: #82aaff;
+    --btn-hover-bg: #82aaff;
+    --btn-hover-color: #1a1a1a;
+
 }
 
 .theme-switch {
@@ -46,7 +121,6 @@
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
 }
-
 body {    
     font-family: 'Poppins', sans-serif;
     padding-top: 90px;
