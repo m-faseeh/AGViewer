@@ -38,6 +38,7 @@ import {
   faLockOpen,
   faProjectDiagram,
   faWindowClose,
+  faDownload,
 } from '@fortawesome/free-solid-svg-icons';
 import cxtmenu from '../../lib/cytoscape-cxtmenu-bitnine';
 import { initLocation, seletableLayouts } from './CytoscapeLayouts';
@@ -292,6 +293,24 @@ const CypherResultCytoscapeCharts = ({
       cyRef.current.fit(undefined, 50);
     }
   };
+  const handleExportGraph = () => {
+    if (cyRef.current) {
+      const pngData = cyRef.current.png({
+        full: true,
+        bg: '#ffffff',
+        scale: 2, // high resolution
+      });
+
+      // Create a link and trigger the download
+      const link = document.createElement('a');
+      link.href = pngData;
+      link.download = 'graph-export.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <div>
       <CytoscapeComponent
@@ -321,6 +340,9 @@ const CypherResultCytoscapeCharts = ({
         </Button>
         <Button className={styles.zoomButton} onClick={handleZoomOut}>
           -
+        </Button>
+        <Button className={styles.zoomButton} onClick={handleExportGraph}>
+          <FontAwesomeIcon icon={faDownload} />
         </Button>
       </div>
     </div>

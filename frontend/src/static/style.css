@@ -158,9 +158,9 @@ body.dark {
     --frame-header-color: #dddddd;
     --frame-button-color: #bbbbbb;
     --frame-button-hover: #ffffff;
-    --zoom-bg: rgba(255, 255, 255, 0.05);
+    --zoom-bg: rgba(255, 255, 255, 0.15);
     --zoom-color: #dddddd;
-    --zoom-hover-bg: rgba(255, 255, 255, 0.15);
+    --zoom-hover-bg: rgba(255, 255, 255, 0.25);
     --zoom-hover-color: white;
     --canvas-bg:#1f1f1f;
     --menu-bg: rgba(44, 44, 44, 1);
