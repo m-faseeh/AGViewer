@@ -17,17 +17,44 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Layout } from 'antd';
+// import { Layout } from 'antd';
 
 import EditorContainer from '../../contents/containers/Editor';
 import Sidebar from '../../sidebar/containers/Sidebar';
 import Contents from '../../contents/containers/Contents';
 import { loadFromCookie, saveToCookie } from '../../../features/cookie/CookieUtil';
 import logoImage from './logo.png';
+import ResizableSplitLayout from '../../splitlayout/ResizableSplitLayout';
+import '../../splitlayout/split-pane.css';
 
-const {
-  Sider, Header, Footer,
-} = Layout;
+// const {
+//   Header, Footer,
+// } = Layout;
+const HeaderStyles = {
+  height: '64px',
+  // padding: '0 50px',
+  color: 'rgba(0, 0, 0, 0.85)',
+  lineHeight: '64px',
+  background: '#001529',
+  // margin: '5px 10px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+const FooterStyles = {
+  // padding: '24px 50px',
+  color: 'rgba(0, 0, 0, 0.85)',
+  fontSize: '14px',
+  background: '#f0f2f5',
+  textAlign: 'center',
+  position: 'fixed',
+  bottom: 0,
+  right: 0,
+  width: '67%',
+  padding: '5px 5px',
+  zIndex: 1000,
+
+};
 
 const DefaultTemplate = ({
   theme,
@@ -77,63 +104,42 @@ const DefaultTemplate = ({
   });
 
   return (
-    // Main layout covering the entire viewport height
-    <Layout hasSider style={{ minHeight: '100vh' }}>
-
-      {/* SIDEBAR */}
-      <Sider
-        width="33vw"
+    <ResizableSplitLayout
+      minSize={250}
+      defaultSize="33%"
+      maxSize={900}
+      primary="first"
+    >
+      {/* SIDEBAR (Left Pane) */}
+      <div
+        className="editor-division"
         style={{
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
+          height: '100vh', width: '100%', display: 'flex', flexDirection: 'column',
         }}
       >
-        <div
-          className="editor-division"
-          style={{ height: '100vh', minWidth: '33vw', padding: '0' }}
+        <header
+          style={HeaderStyles}
         >
-          <Header
-            style={{
-              margin: '5px 10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src={logoImage}
-              alt="AgensGraph Logo"
-              style={{ maxHeight: '100%', maxWidth: '100%', height: 'auto' }}
-            />
-          </Header>
-          <EditorContainer />
-          <Sidebar />
-        </div>
-      </Sider>
-      {/* END SIDEBAR */}
+          <img
+            src={logoImage}
+            alt="AgensGraph Logo"
+            style={{ maxHeight: '100%', maxWidth: '100%', height: 'auto' }}
+          />
+        </header>
+        <EditorContainer />
+        <Sidebar />
+      </div>
 
-      {/* CONTENTS */}
-      <Layout
-        style={{
-          marginLeft: '33vw',
-          // Ensure the content layout stretches to fill the available height
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh',
-        }}
+      {/* CONTENTS (Right Pane) */}
+      <div style={{
+        height: '100vh', width: '100%', display: 'flex', flexDirection: 'column',
+      }}
       >
         <Contents style={{ flex: 1 }} />
 
-        <Footer
+        <footer
           className="flex-end"
-          style={{
-            textAlign: 'center',
-            position: 'fixed',
-            bottom: 0,
-            width: 'calc(100% - 33vw)',
-            padding: '5px 5px',
-          }}
+          style={FooterStyles}
         >
           Copyright © 2025 SKAI Worldwide Co., Ltd. All Rights Reserved.
           <br />
@@ -144,12 +150,9 @@ const DefaultTemplate = ({
           >
             Check AgensGraph Documentation
           </a>
-        </Footer>
-
-      </Layout>
-      {/* END CONTENTS */}
-
-    </Layout>
+        </footer>
+      </div>
+    </ResizableSplitLayout>
   );
 };
 
