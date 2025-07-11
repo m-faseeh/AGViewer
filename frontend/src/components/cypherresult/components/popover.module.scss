@@ -1,25 +1,3 @@
-:root {
-  --input-bg: #F8F9FA;
-  --input-text: #2756FF;
-  --input-default-text: #808080;
-  --input-border-hover: #2756FF;
-  --btn-bg: #F8F9FA;
-  --btn-color: #2756FF;
-  --btn-hover-bg: #2756FF;
-  --btn-hover-color: #F8F9FA;
-}
-
-body.dark {
-  --input-bg: #2c2c2c;
-  --input-text: #82aaff;
-  --input-default-text: #aaaaaa;
-  --input-border-hover: #82aaff;
-  --btn-bg: #2c2c2c;
-  --btn-color: #82aaff;
-  --btn-hover-bg: #82aaff;
-  --btn-hover-color: #1a1a1a;
-}
-
 .title {
   font-size: 18px;
   font-weight: bold;

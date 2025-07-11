@@ -47,6 +47,7 @@ export const getContextMenuTheme = () => ({
   inputTextColor: getCssVar('--input-text'),
   inputDefaultText: getCssVar('--input-default-text'),
   inputBorderHover: getCssVar('--input-border-hover'),
+  cybherTableTextColor: getCssVar('--cypher-table-text-color'),
 });
 
 ThemeProvider.propTypes = {
