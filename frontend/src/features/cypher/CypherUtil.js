@@ -14,6 +14,21 @@
  * limitations under the License.
  */
 
+import {
+  faBuilding,
+  faUser,
+  faEnvelope,
+} from '@fortawesome/free-regular-svg-icons';
+import {
+  faSchool,
+  faLocationArrow,
+  faBook,
+  faEnvelopeOpenText,
+  faGlobe,
+  faPhone,
+  faSitemap,
+} from '@fortawesome/free-solid-svg-icons';
+
 export const nodeLabelColors = [
   {
     color: '#604A0E', borderColor: '#423204', fontColor: '#FFF', nodeLabels: new Set([]), index: 0,
@@ -107,6 +122,57 @@ export const edgeLabelSizes = [
   { size: 16, labels: new Set([]), index: 0 },
   { size: 21, labels: new Set([]), index: 0 },
 ];
+export const nodeLabelIcons = {
+  // label: icon
+  Person: faUser,
+  Company: faBuilding,
+  School: faSchool,
+  Location: faLocationArrow,
+  Book: faBook,
+  Event: faEnvelopeOpenText,
+  Email: faEnvelope,
+  Website: faGlobe,
+  Phone: faPhone,
+  Organization: faSitemap,
+};
+// Helper function to convert FontAwesome icon to SVG data URL
+const iconToSvgDataUrl = (icon, color = '#000') => {
+  if (!icon || !icon.icon) return null;
+  const [width, height, , , svgPathData] = icon.icon;
+  const svgString = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" fill="${color}">
+      <path d="${svgPathData}" />
+    </svg>
+  `;
+
+  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+};
+const getNodeIconStyle = (iconDataUrl) => ({
+  'background-image': iconDataUrl,
+  'background-fit': 'contain',
+  'background-position-x': '50%',
+  'background-position-y': '50%',
+  'background-width': '60%',
+  'background-height': '60%',
+});
+export const applyNodeIconToCytoscape = (cy, labelName, icon) => {
+  if (!cy) return;
+
+  const iconDataUrl = iconToSvgDataUrl(icon, '#000');
+
+  cy.nodes().forEach((node) => {
+    if (node.data('label') === labelName) {
+      if (iconDataUrl) {
+        node.style(getNodeIconStyle(iconDataUrl));
+      } else {
+        // this will remove icon if none specified
+        node.style({
+          'background-image': 'none',
+        });
+      }
+    }
+  });
+};
 
 export const nodeLabelCaptions = {};
 export const edgeLabelCaptions = {};
@@ -279,6 +345,9 @@ export const updateLabelCaption = (labelType, labelName, newLabelCaption) => {
     edgeLabelCaptions[labelName] = newLabelCaption;
   }
 };
+export const updateLabelIcon = (labelName, iconObj) => {
+  nodeLabelIcons[labelName] = iconObj;
+};
 
 export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
   const nodes = [];
@@ -358,6 +427,9 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
       if (!Object.prototype.hasOwnProperty.call(val.properties, nodeLegend.caption)) {
         nodeLegend[labelName].caption = getCaption('node', val);
       }
+
+      const icon = nodeLabelIcons[labelName] || null;
+      const iconDataUrl = icon ? iconToSvgDataUrl(icon, nodeLegend[labelName].fontColor) : null;
       nodes.push(
         {
           group: 'nodes',
@@ -370,9 +442,12 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
             size: nodeLegend[labelName].size,
             properties: val.properties,
             caption: nodeLegend[labelName].caption,
+            icon,
+            iconDataUrl,
           },
           alias,
           classes: isNew ? 'new node' : 'node',
+          style: iconDataUrl ? getNodeIconStyle(iconDataUrl) : {},
         },
       );
     }
@@ -412,6 +487,8 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
 
 const generateMetadataElements = (nodeLegend, edgeLegend, nodes, edges, val) => {
   const labelName = val.la_name;
+  const icon = nodeLabelIcons[labelName] || null;
+  const iconDataUrl = icon ? iconToSvgDataUrl(icon, nodeLegend[labelName].fontColor) : null;
   if (val.la_start && val.la_end) {
     edges.push(
       {
@@ -444,8 +521,11 @@ const generateMetadataElements = (nodeLegend, edgeLegend, nodes, edges, val) => 
           size: nodeLegend[labelName].size,
           properties: { count: val.la_count, id: val.la_oid, name: val.la_name },
           caption: nodeLegend[labelName].caption,
+          icon,
+          iconDataUrl,
         },
         classes: 'node',
+        style: iconDataUrl ? getNodeIconStyle(iconDataUrl) : {},
       },
     );
   }
