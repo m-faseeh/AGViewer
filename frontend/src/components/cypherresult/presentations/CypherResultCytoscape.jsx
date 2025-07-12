@@ -378,6 +378,7 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
         maxDataOfGraph={maxDataOfGraph}
       />
       <CypherResultCytoscapeFooter
+        cy={cytoscapeObject}
         captions={captions}
         colorChange={colorChange}
         sizeChange={sizeChange}

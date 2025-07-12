@@ -27,10 +27,14 @@ import {
   updateLabelCaption,
   updateLabelColor,
   updateNodeLabelSize,
+  nodeLabelIcons,
+  updateLabelIcon,
+  applyNodeIconToCytoscape,
 } from '../../features/cypher/CypherUtil';
 import CytoscapeLayoutDropdown from './CytoscapeLayoutDropdown';
 
 const CypherResultCytoscapeFooter = ({
+  cy,
   footerData,
   edgeLabelColors,
   nodeLabelColors,
@@ -216,6 +220,30 @@ const CypherResultCytoscapeFooter = ({
         }
         return null;
       };
+      const generateIcons = () => {
+        if (footerData.data.type !== 'node') return null;
+
+        return Object.entries(nodeLabelIcons).map(([label, icon]) => (
+          <button
+            key={label}
+            onClick={() => {
+              updateLabelIcon(footerData.data.label, icon); // 👈 we'll define this
+              applyNodeIconToCytoscape(cy, footerData.data.label, icon);
+            }}
+            type="button"
+            className="btn iconSelector"
+            style={{
+              padding: '4px',
+              margin: '0 4px',
+              border: '1px solid #ccc',
+              backgroundColor: '#fff',
+            }}
+            aria-label={`Select ${label} icon`}
+          >
+            <FontAwesomeIcon icon={icon} />
+          </button>
+        ));
+      };
 
       return (
         <div className="d-flex pl-3">
@@ -237,6 +265,10 @@ const CypherResultCytoscapeFooter = ({
             <span className="label">
               <span className="pl-3">{t('footer.size')}</span>
               {generateButton()}
+            </span>
+            <span className="label">
+              <span className="pl-3">Icon : </span>
+              {generateIcons()}
             </span>
             <span className="label">
               <span className="pl-3">{t('footer.caption')}</span>
@@ -354,6 +386,8 @@ CypherResultCytoscapeFooter.propTypes = {
   cytoscapeLayout: PropTypes.string.isRequired,
   selectedCaption: PropTypes.string,
   captions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  cy: PropTypes.object.isRequired,
 };
 
 export default CypherResultCytoscapeFooter;
