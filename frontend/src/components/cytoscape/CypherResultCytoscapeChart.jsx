@@ -38,7 +38,6 @@ import cxtmenu from '../../lib/cytoscape-cxtmenu-bitnine';
 import { initLocation, seletableLayouts } from './CytoscapeLayouts';
 import { stylesheet } from './CytoscapeStyleSheet';
 import { generateCytoscapeElement } from '../../features/cypher/CypherUtil';
-import { getContextMenuTheme } from '../../contexts/ThemeContext';
 import styles from '../frame/Frame.module.scss';
 
 cytoscape.use(COSEBilkent);
@@ -151,7 +150,6 @@ const CypherResultCytoscapeCharts = ({
 
   useEffect(() => {
     if (cytoscapeMenu === null && cytoscapeObject !== null) {
-      const menuTheme = getContextMenuTheme();
       const cxtMenuConf = {
         menuRadius(ele) {
           return ele.cy().zoom() <= 1 ? 55 : 70;
@@ -204,8 +202,8 @@ const CypherResultCytoscapeCharts = ({
             },
           },
         ],
-        fillColor: menuTheme.fillColor,
-        activeFillColor: menuTheme.activeFillColor,
+        fillColor: 'var(--menu-bg)',
+        activeFillColor: 'var(--menu-active-bg)',
         activePadding: 0,
         indicatorSize: 0,
         separatorWidth: 4, /* might cause conflict in theme switcher */
@@ -213,7 +211,7 @@ const CypherResultCytoscapeCharts = ({
         minSpotlightRadius: 11,
         maxSpotlightRadius: 99,
         openMenuEvents: 'cxttap',
-        itemColor: menuTheme.itemColor,
+        itemColor: 'var(--menu-item-color)',
         itemTextShadowColor: 'transparent', /* might cause conflict in theme switcher */
         zIndex: 9999,
         atMouse: false,

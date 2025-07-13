@@ -19,7 +19,6 @@ import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import { uuid } from 'cytoscape/src/util';
 import CypherResultTab from '../../cytoscape/CypherResultTab';
-import { getContextMenuTheme } from '../../../contexts/ThemeContext';
 
 const CypherResultTable = ({ data, ...props }) => {
   const [localColumns, setLocalColumns] = useState([]);
@@ -72,12 +71,11 @@ const CypherResultTable = ({ data, ...props }) => {
   } if (data.command === null) {
     return <div style={{ margin: '25px' }}><span style={{ whiteSpace: 'pre-line' }}>Query not entered!</span></div>;
   }
-  const tableTheme = getContextMenuTheme();
   const { refKey } = props;
   return (
     <div className="legend-area">
       <div className="container-frame-tab">
-        <div style={{ width: '80%', color: tableTheme.cybherTableTextColor }}>
+        <div style={{ width: '80%', color: 'var(--cypher-table-text-color)' }}>
           <div className="d-flex nodeLegend">Node:</div>
           <div className="d-flex edgeLegend">Edge:</div>
         </div>
