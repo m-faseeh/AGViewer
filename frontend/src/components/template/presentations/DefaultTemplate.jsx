@@ -17,8 +17,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-// import { Layout } from 'antd';
-
 import EditorContainer from '../../contents/containers/Editor';
 import Sidebar from '../../sidebar/containers/Sidebar';
 import Contents from '../../contents/containers/Contents';
@@ -27,9 +25,6 @@ import logoImage from './logo.png';
 import ResizableSplitLayout from '../../splitlayout/ResizableSplitLayout';
 import '../../splitlayout/split-pane.css';
 
-// const {
-//   Header, Footer,
-// } = Layout;
 const HeaderStyles = {
   height: '64px',
   // padding: '0 50px',
@@ -43,9 +38,9 @@ const HeaderStyles = {
 };
 const FooterStyles = {
   // padding: '24px 50px',
-  color: 'rgba(0, 0, 0, 0.85)',
+  color: 'var(--primary-color)',
   fontSize: '14px',
-  background: '#f0f2f5',
+  background: 'var(--footer-bg-color)',
   textAlign: 'center',
   position: 'fixed',
   bottom: 0,

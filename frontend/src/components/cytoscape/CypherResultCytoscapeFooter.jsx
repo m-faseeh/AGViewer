@@ -46,17 +46,6 @@ const CypherResultCytoscapeFooter = ({
   cytoscapeLayout,
 }) => {
   const [footerExpanded, setFooterExpanded] = useState(false);
-  // const generateSvgIconString = (icon) => {
-  //   const [width, height, , , svgPathData] = icon.icon;
-  //   return `
-  //     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" fill="currentColor">
-  //       <path d="${svgPathData}" />
-  //     </svg>
-  //   `;
-  // };
-  // const svgToBase64 = (svgString) => {
-  //   `data:image/svg+xml;base64,${btoa(svgString)}`
-  // };
   const extractData = (d) => {
     const extractedData = [];
     for (let i = 0; i < Object.entries(d).length; i += 1) {
@@ -114,7 +103,7 @@ const CypherResultCytoscapeFooter = ({
           Layout :&nbsp;
           <select
             id="selectLayout"
-            className="col-1 custom-select custom-select-sm layout-select"
+            className="col-2 custom-select custom-select-sm layout-select"
             defaultValue={cytoscapeLayout}
             onChange={(e) => [setCytoscapeLayout(e.target.value)]}
           >
@@ -149,7 +138,7 @@ const CypherResultCytoscapeFooter = ({
           Layout :&nbsp;
           <select
             id="selectLayout"
-            className="col-1 custom-select custom-select-sm layout-select"
+            className="col-2 custom-select custom-select-sm layout-select"
             defaultValue={cytoscapeLayout}
             onChange={(e) => [setCytoscapeLayout(e.target.value)]}
           >
@@ -346,7 +335,7 @@ const CypherResultCytoscapeFooter = ({
           Layout :&nbsp;
           <select
             id="selectLayout"
-            className="col-1 custom-select custom-select-sm layout-select"
+            className="col-2 custom-select custom-select-sm layout-select"
             defaultValue={cytoscapeLayout}
             onChange={(e) => [setCytoscapeLayout(e.target.value)]}
           >
@@ -372,7 +361,7 @@ const CypherResultCytoscapeFooter = ({
         <div className="px-1">Layout : </div>
         <select
           id="selectLayout"
-          className="col-1 custom-select custom-select-sm layout-select"
+          className="col-2 custom-select custom-select-sm layout-select"
           defaultValue={cytoscapeLayout}
           onChange={(e) => [setCytoscapeLayout(e.target.value)]}
         >

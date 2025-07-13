@@ -35,21 +35,6 @@ export const useTheme = () => {
   }
   return context;
 };
-export function getCssVar(name, fallback = '') {
-  return getComputedStyle(document.body).getPropertyValue(name).trim() || fallback;
-}
-export const getContextMenuTheme = () => ({
-  fillColor: getCssVar('--menu-bg'),
-  activeFillColor: getCssVar('--menu-active-bg'),
-  itemColor: getCssVar('--menu-item-color'),
-
-  inputBackground: getCssVar('--input-bg'),
-  inputTextColor: getCssVar('--input-text'),
-  inputDefaultText: getCssVar('--input-default-text'),
-  inputBorderHover: getCssVar('--input-border-hover'),
-  cybherTableTextColor: getCssVar('--cypher-table-text-color'),
-});
-
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
