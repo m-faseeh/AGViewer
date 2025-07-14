@@ -29,6 +29,7 @@ import {
   updateLabelIcon,
   applyNodeIconToCytoscape,
 } from '../../features/cypher/CypherUtil';
+import CytoscapeLayoutDropdown from './CytoscapeLayoutDropdown';
 
 const CypherResultCytoscapeFooter = ({
   cy,
@@ -101,25 +102,12 @@ const CypherResultCytoscapeFooter = ({
             />
           </button>
           Layout :&nbsp;
-          <select
+          <CytoscapeLayoutDropdown
+            selectedLayout={cytoscapeLayout}
+            onChange={setCytoscapeLayout}
             id="selectLayout"
-            className="col-2 custom-select custom-select-sm layout-select"
-            defaultValue={cytoscapeLayout}
-            onChange={(e) => [setCytoscapeLayout(e.target.value)]}
-          >
-            <option value="random">Random</option>
-            <option value="grid">Grid</option>
-            <option value="breadthFirst">Breadth-First</option>
-            <option value="concentric">Concentric</option>
-            <option value="cola">Cola</option>
-            <option value="cose">Cose</option>
-            <option value="coseBilkent">Cose-Bilkent</option>
-            <option value="dagre">Dagre</option>
-            <option value="klay">Klay</option>
-            <option value="euler">Euler</option>
-            <option value="avsdf">Avsdf</option>
-            <option value="spread">Spread</option>
-          </select>
+            className="col-2"
+          />
         </div>
       );
     }
@@ -136,25 +124,12 @@ const CypherResultCytoscapeFooter = ({
             edges
           </div>
           Layout :&nbsp;
-          <select
+          <CytoscapeLayoutDropdown
+            selectedLayout={cytoscapeLayout}
+            onChange={setCytoscapeLayout}
             id="selectLayout"
-            className="col-2 custom-select custom-select-sm layout-select"
-            defaultValue={cytoscapeLayout}
-            onChange={(e) => [setCytoscapeLayout(e.target.value)]}
-          >
-            <option value="random">Random</option>
-            <option value="grid">Grid</option>
-            <option value="breadthFirst">Breadth-First</option>
-            <option value="concentric">Concentric</option>
-            <option value="cola">Cola</option>
-            <option value="cose">Cose</option>
-            <option value="coseBilkent">Cose-Bilkent</option>
-            <option value="dagre">Dagre</option>
-            <option value="klay">Klay</option>
-            <option value="euler">Euler</option>
-            <option value="avsdf">Avsdf</option>
-            <option value="spread">Spread</option>
-          </select>
+            className="col-2"
+          />
         </div>
       );
     }
@@ -333,25 +308,12 @@ const CypherResultCytoscapeFooter = ({
             />
           </button>
           Layout :&nbsp;
-          <select
+          <CytoscapeLayoutDropdown
+            selectedLayout={cytoscapeLayout}
+            onChange={setCytoscapeLayout}
             id="selectLayout"
-            className="col-2 custom-select custom-select-sm layout-select"
-            defaultValue={cytoscapeLayout}
-            onChange={(e) => [setCytoscapeLayout(e.target.value)]}
-          >
-            <option value="random">Random</option>
-            <option value="grid">Grid</option>
-            <option value="breadthFirst">Breadth-First</option>
-            <option value="concentric">Concentric</option>
-            <option value="cola">Cola</option>
-            <option value="cose">Cose</option>
-            <option value="coseBilkent">Cose-Bilkent</option>
-            <option value="dagre">Dagre</option>
-            <option value="klay">Klay</option>
-            <option value="euler">Euler</option>
-            <option value="avsdf">Avsdf</option>
-            <option value="spread">Spread</option>
-          </select>
+            className="col-2"
+          />
         </div>
       );
     }
@@ -359,25 +321,12 @@ const CypherResultCytoscapeFooter = ({
       <div className="d-flex pl-3">
         <div className="mr-auto label pl-3" />
         <div className="px-1">Layout : </div>
-        <select
+        <CytoscapeLayoutDropdown
+          selectedLayout={cytoscapeLayout}
+          onChange={setCytoscapeLayout}
           id="selectLayout"
-          className="col-2 custom-select custom-select-sm layout-select"
-          defaultValue={cytoscapeLayout}
-          onChange={(e) => [setCytoscapeLayout(e.target.value)]}
-        >
-          <option value="random">Random</option>
-          <option value="grid">Grid</option>
-          <option value="breadthFirst">Breadth-First</option>
-          <option value="concentric">Concentric</option>
-          <option value="cola">Cola</option>
-          <option value="cose">Cose</option>
-          <option value="coseBilkent">Cose-Bilkent</option>
-          <option value="dagre">Dagre</option>
-          <option value="klay">Klay</option>
-          <option value="euler">Euler</option>
-          <option value="avsdf">Avsdf</option>
-          <option value="spread">Spread</option>
-        </select>
+          className="col-2"
+        />
       </div>
     );
   };
