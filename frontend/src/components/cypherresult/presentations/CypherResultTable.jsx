@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bitnine Co., Ltd.
+ * Copyright 2025 SKAI Worldwide Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ const CypherResultTable = ({ data, ...props }) => {
         title: key,
         dataIndex: isKey ? randKeyName : key,
         key: isKey ? randKeyName : key,
-        render: (text) => <>{JSON.stringify(text)}</>,
+        render: (text) => <>{JSON.stringify(text, null, ' ')}</>,
       });
     });
     setLocalColumns(columnsForFTable);

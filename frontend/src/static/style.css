@@ -53,7 +53,7 @@
     --code-bg: rgba(228, 161, 161, 0.1);
     --pre-bg: #f5f5f5;
     --code-block-bg: #f3f4f5;
-    --editor-border-color: #ccc;
+    --editor-border-color: rgba(0,0,0,.125); /* prev #ccc check it*/
     --editor-bg-image: url(http://i.imgur.com/2cOaJ.png);
 
     --frame-bg: #ffffff;
@@ -350,7 +350,7 @@ a[data-toggle="collapse"] {
     height: auto;    
     word-wrap: break-word;    
     background-clip: border-box;
-    background: var(--editor-bg) 0% 0% no-repeat padding-box;
+    /* background: var(--editor-bg) 0% 0% no-repeat padding-box; */
     border: 1px solid var(--editor-border-color);
     border-radius: .25rem;
     border-radius: 5px;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bitnine Co., Ltd.
+ * Copyright 2025 SKAI Worldwide Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,6 +99,7 @@ const CypherResultCytoscapeFooter = ({
           >
             <FontAwesomeIcon
               icon={footerExpanded ? faAngleUp : faAngleDown}
+              style={{ color: 'gray' }}
             />
           </button>
           Layout :&nbsp;
