@@ -84,9 +84,9 @@ const CytoscapeLayoutDropdown = ({
           fontSize: '0.875rem',
           fontWeight: '400',
           lineHeight: '1.5',
-          color: '#495057',
-          backgroundColor: '#fff',
-          border: '1px solid #ced4da',
+          color: 'var(--dropdown-text-color)',
+          backgroundColor: 'var(--dropdown-bg-color)',
+          border: '1px solid var(--dropdown-border-color)',
           borderRadius: '0.25rem',
           cursor: 'pointer',
           minWidth: '140px',
@@ -115,9 +115,9 @@ const CytoscapeLayoutDropdown = ({
             right: '0',
             zIndex: 1000,
             backgroundColor: '#fff',
-            border: '1px solid #ced4da',
+            border: '1px solid var(--dropdown-border-color)',
             borderRadius: '0.25rem',
-            boxShadow: '0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075)',
+            boxShadow: 'var(--dropdown-box-shadow)',
             marginBottom: '0.125rem',
             // maxHeight: '200px',
             overflowY: 'auto',
@@ -136,22 +136,22 @@ const CytoscapeLayoutDropdown = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.375rem 0.75rem',
+                padding: '0rem 0.75rem',
                 cursor: 'pointer',
-                fontSize: '0.875rem',
-                color: '#495057',
-                backgroundColor: option.value === selectedLayout ? '#e9ecef' : 'transparent',
-                borderBottom: '1px solid #f8f9fa',
+                fontSize: '0.75rem',
+                color: 'var(--dropdown-text-color)',
+                backgroundColor: option.value === selectedLayout ? 'var(--dropdown-selected-bg)' : 'var(--dropdown-unselected-bg)',
+                borderBottom: 'var(--dropdown-item-border-bottom)',
                 transition: 'background-color 0.15s ease-in-out',
               }}
               onMouseEnter={(e) => {
                 if (option.value !== selectedLayout) {
-                  e.target.style.backgroundColor = '#f8f9fa';
+                  e.target.style.backgroundColor = 'var(--dropdown-hover-bg)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (option.value !== selectedLayout) {
-                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.backgroundColor = 'var(--dropdown-unselected-bg)';
                 }
               }}
             >
