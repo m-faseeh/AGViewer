@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure Bootstrap styles are imported
@@ -148,7 +153,41 @@ const CypherResultCytoscapeCharts = ({
     addLegendData(generatedData.legend);
     rerenderTargets.removeClass('new');
   };
+  const handleZoomIn = () => {
+    if (cytoscapeObject) {
+      const currentZoom = cytoscapeObject.zoom();
+      const newZoom = currentZoom * 1.3;
 
+      cytoscapeObject.animate(
+        {
+          zoom: newZoom,
+          center: { eles: cytoscapeObject.elements() },
+        },
+        {
+          duration: 100,
+          easing: 'ease-in-out',
+        },
+      );
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (cytoscapeObject) {
+      const currentZoom = cytoscapeObject.zoom();
+      const newZoom = currentZoom * 0.7;
+
+      cytoscapeObject.animate(
+        {
+          zoom: newZoom,
+          center: { eles: cytoscapeObject.elements() },
+        },
+        {
+          duration: 100,
+          easing: 'ease-in-out',
+        },
+      );
+    }
+  };
   useEffect(() => {
     if (cytoscapeMenu === null && cytoscapeObject !== null) {
       const cxtMenuConf = {
