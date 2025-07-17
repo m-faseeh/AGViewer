@@ -179,13 +179,13 @@ a[data-toggle="collapse"] {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 2px 2px 2px 2px;
+    /* padding: 2px 2px 2px 2px; */
     min-width: 0;
     height: auto;    
     word-wrap: break-word;    
     background-clip: border-box;
     /* background: #142B80 0% 0% no-repeat padding-box; */
-    border: 1px solid rgba(0,0,0,.125);
+    /* border: 1px solid rgba(0,0,0,.125); */
     border-radius: .25rem;
     border-radius: 5px;
     opacity: 1;

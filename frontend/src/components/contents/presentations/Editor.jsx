@@ -105,7 +105,7 @@ const Editor = ({
   return (
     <div className="container-fluid" style={{ padding: 0 }}>
       <div className="editor">
-        <div className="container-fluid editor-area card-header">
+        <div className="container-fluid editor-area card-header" style={{ background: 'rgb(0, 21, 41)' }}>
           <div className="input-group input-style">
             <div style={{
               height: '60px',
