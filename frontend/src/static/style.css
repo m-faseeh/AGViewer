@@ -62,9 +62,9 @@
     --frame-header-color: #6c757d;
     --frame-button-color: gray;
     --frame-button-hover: black;
-    --zoom-bg: rgba(0, 0, 0, 0.03);
+    --zoom-bg: rgba(0, 0, 0, 0.15);
     --zoom-color: #6c757d;
-    --zoom-hover-bg: rgba(0, 0, 0, 0.07);
+    --zoom-hover-bg: rgba(0, 0, 0, 0.25);
     --zoom-hover-color: black;
     --canvas-bg:#ffffff;
 
