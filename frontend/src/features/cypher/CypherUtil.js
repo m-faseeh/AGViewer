@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  faBuilding,
-  faUser,
-  faEnvelope,
-} from '@fortawesome/free-regular-svg-icons';
-import {
-  faSchool,
-  faLocationArrow,
-  faBook,
-  faEnvelopeOpenText,
-  faGlobe,
-  faPhone,
-  faSitemap,
-} from '@fortawesome/free-solid-svg-icons';
+import { nodeLabelIcons, iconToSvgDataUrl, getNodeIconStyle } from './iconUtil';
 
 export const nodeLabelColors = [
   {
@@ -122,39 +109,6 @@ export const edgeLabelSizes = [
   { size: 16, labels: new Set([]), index: 0 },
   { size: 21, labels: new Set([]), index: 0 },
 ];
-export const nodeLabelIcons = {
-  // label: icon
-  Person: faUser,
-  Company: faBuilding,
-  School: faSchool,
-  Location: faLocationArrow,
-  Book: faBook,
-  Event: faEnvelopeOpenText,
-  Email: faEnvelope,
-  Website: faGlobe,
-  Phone: faPhone,
-  Organization: faSitemap,
-};
-// Helper function to convert FontAwesome icon to SVG data URL
-const iconToSvgDataUrl = (icon, color = '#000') => {
-  if (!icon || !icon.icon) return null;
-  const [width, height, , , svgPathData] = icon.icon;
-  const svgString = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" fill="${color}">
-      <path d="${svgPathData}" />
-    </svg>
-  `;
-
-  return `data:image/svg+xml;base64,${btoa(svgString)}`;
-};
-const getNodeIconStyle = (iconDataUrl) => ({
-  'background-image': iconDataUrl,
-  'background-fit': 'contain',
-  'background-position-x': '50%',
-  'background-position-y': '50%',
-  'background-width': '60%',
-  'background-height': '60%',
-});
 export const applyNodeIconToCytoscape = (cy, labelName, icon) => {
   if (!cy) return;
 

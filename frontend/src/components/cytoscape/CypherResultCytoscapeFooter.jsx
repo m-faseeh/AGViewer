@@ -27,10 +27,10 @@ import {
   updateLabelCaption,
   updateLabelColor,
   updateNodeLabelSize,
-  nodeLabelIcons,
   updateLabelIcon,
   applyNodeIconToCytoscape,
 } from '../../features/cypher/CypherUtil';
+import { nodeLabelIcons } from '../../features/cypher/iconUtil';
 import CytoscapeLayoutDropdown from './CytoscapeLayoutDropdown';
 
 const CypherResultCytoscapeFooter = ({
