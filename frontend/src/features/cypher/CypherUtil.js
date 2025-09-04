@@ -111,13 +111,13 @@ export const edgeLabelSizes = [
 ];
 export const applyNodeIconToCytoscape = (cy, labelName, icon) => {
   if (!cy) return;
-
   const iconDataUrl = iconToSvgDataUrl(icon, '#000');
-
   cy.nodes().forEach((node) => {
     if (node.data('label') === labelName) {
       if (iconDataUrl) {
-        node.style(getNodeIconStyle(iconDataUrl));
+        // Use the node's stored baseIconSize
+        const iconSize = node.data('baseIconSize') || 30; // fallback size
+        node.style(getNodeIconStyle(iconDataUrl, iconSize));
       } else {
         // this will remove icon if none specified
         node.style({
@@ -244,6 +244,21 @@ const sortByKey = (data) => {
   return sorted;
 };
 
+export const updateIconStyle = (cy) => {
+  if (!cy) return;
+  // const zoom = cy.zoom();
+  cy.nodes().forEach((node) => {
+    const iconDataUrl = node.style('background-image'); // already applied earlier
+    if (!iconDataUrl || iconDataUrl === 'none') return;
+    console.log('node size:', node.data('size'));
+    // use node's width (or height) to scale icon proportionally
+    const baseSize = node.data('size') || 40;
+    const iconSize = (baseSize); // relative to node size only
+    node.style(getNodeIconStyle(iconDataUrl, iconSize));
+    // console.log('icon style: ', getNodeIconStyle(iconDataUrl, iconSize));
+  });
+};
+
 export const updateLabelColor = (labelType, labelName, newLabelColor) => {
   if (labelType === 'node') {
     nodeLabelColors.forEach((labelColor) => {
@@ -268,7 +283,7 @@ export const updateLabelColor = (labelType, labelName, newLabelColor) => {
   }
 };
 
-export const updateNodeLabelSize = (labelName, newLabelSize) => {
+export const updateNodeLabelSize = (labelName, newLabelSize, cy) => {
   nodeLabelSizes.forEach((labelSize) => {
     if (labelSize.labels.has(labelName)) {
       labelSize.labels.delete(labelName);
@@ -278,6 +293,14 @@ export const updateNodeLabelSize = (labelName, newLabelSize) => {
       labelSize.labels.add(labelName);
     }
   });
+  if (typeof cy !== 'undefined') {
+    // Update the baseIconSize for nodes with this label
+    const newIconSize = newLabelSize * 0.6;
+    cy.nodes(`[label = "${labelName}"]`).forEach((node) => {
+      node.data('baseIconSize', newIconSize);
+    });
+    updateIconStyle(cy);
+  }
 };
 
 export const updateEdgeLabelSize = (labelName, newLabelSize) => {
@@ -381,7 +404,9 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
       if (!Object.prototype.hasOwnProperty.call(val.properties, nodeLegend.caption)) {
         nodeLegend[labelName].caption = getCaption('node', val);
       }
-
+      const iconSize = nodeLegend[labelName]?.size
+        ? nodeLegend[labelName].size * 0.6 // 60% of the node size
+        : 40; // fallback default
       const icon = nodeLabelIcons[labelName] || null;
       const iconDataUrl = icon ? iconToSvgDataUrl(icon, nodeLegend[labelName].fontColor) : null;
       nodes.push(
@@ -394,6 +419,7 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
             borderColor: nodeLegend[labelName].borderColor,
             fontColor: nodeLegend[labelName].fontColor,
             size: nodeLegend[labelName].size,
+            baseIconSize: iconSize,
             properties: val.properties,
             caption: nodeLegend[labelName].caption,
             icon,
@@ -401,7 +427,7 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
           },
           alias,
           classes: isNew ? 'new node' : 'node',
-          style: iconDataUrl ? getNodeIconStyle(iconDataUrl) : {},
+          style: iconDataUrl ? getNodeIconStyle(iconDataUrl, iconSize) : {},
         },
       );
     }
@@ -441,6 +467,9 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
 
 const generateMetadataElements = (nodeLegend, edgeLegend, nodes, edges, val) => {
   const labelName = val.la_name;
+  const iconSize = nodeLegend[labelName]?.size
+    ? nodeLegend[labelName].size * 0.6 // 60% of the node size
+    : 40; // fallback default
   const icon = nodeLabelIcons[labelName] || null;
   const iconDataUrl = icon ? iconToSvgDataUrl(icon, nodeLegend[labelName].fontColor) : null;
   if (val.la_start && val.la_end) {
@@ -473,13 +502,14 @@ const generateMetadataElements = (nodeLegend, edgeLegend, nodes, edges, val) => 
           borderColor: nodeLegend[labelName].borderColor,
           fontColor: nodeLegend[labelName].fontColor,
           size: nodeLegend[labelName].size,
+          baseIconSize: iconSize,
           properties: { count: val.la_count, id: val.la_oid, name: val.la_name },
           caption: nodeLegend[labelName].caption,
           icon,
           iconDataUrl,
         },
         classes: 'node',
-        style: iconDataUrl ? getNodeIconStyle(iconDataUrl) : {},
+        style: iconDataUrl ? getNodeIconStyle(iconDataUrl, iconSize) : {},
       },
     );
   }

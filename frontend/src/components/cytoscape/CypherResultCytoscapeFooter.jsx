@@ -227,7 +227,7 @@ const CypherResultCytoscapeFooter = ({
           <button
             key={label}
             onClick={() => {
-              updateLabelIcon(footerData.data.label, icon); // 👈 we'll define this
+              updateLabelIcon(footerData.data.label, icon);
               applyNodeIconToCytoscape(cy, footerData.data.label, icon);
             }}
             type="button"

@@ -157,7 +157,8 @@ const CypherResultCytoscapeCharts = ({
   const handleZoomIn = () => {
     if (cytoscapeObject) {
       const currentZoom = cytoscapeObject.zoom();
-      const newZoom = currentZoom * 1.3;
+      const newZoom = currentZoom + 0.1;
+      // console.log('zoom in here', newZoom);
 
       cytoscapeObject.animate(
         {
@@ -167,6 +168,10 @@ const CypherResultCytoscapeCharts = ({
         {
           duration: 100,
           easing: 'ease-in-out',
+          // complete: () => {
+          //   // 👇 Recalculate icon sizes after zoom animation completes
+          //   updateIconStyle(cytoscapeObject);
+          // },
         },
       );
     }
@@ -176,7 +181,7 @@ const CypherResultCytoscapeCharts = ({
     if (cytoscapeObject) {
       const currentZoom = cytoscapeObject.zoom();
       const newZoom = currentZoom * 0.7;
-
+      // console.log('zoom out here', newZoom);
       cytoscapeObject.animate(
         {
           zoom: newZoom,
@@ -185,6 +190,11 @@ const CypherResultCytoscapeCharts = ({
         {
           duration: 100,
           easing: 'ease-in-out',
+          // complete: () => {
+          //   // 👇 Recalculate icon sizes after zoom animation completes
+          //   updateIconStyle(cytoscapeObject);
+          // },
+
         },
       );
     }
@@ -277,6 +287,29 @@ const CypherResultCytoscapeCharts = ({
       }
     }
   }, [cytoscapeObject, cytoscapeLayout]);
+  // displays zoom level on console
+  useEffect(() => {
+    if (!cytoscapeObject) {
+      return undefined;
+    }
+    let lastZoom = cytoscapeObject.zoom();
+
+    const handleZoom = () => {
+      const currentZoom = cytoscapeObject.zoom();
+      const zoomDirection = currentZoom > lastZoom ? 'In (+)' : 'Out (-)';
+      console.log(`${zoomDirection} | zoom level: ${currentZoom.toFixed(2)}`);
+      lastZoom = currentZoom;
+
+      // Optional: recalculate icon sizes here if needed
+      // updateIconStyle(cytoscapeObject);
+    };
+
+    cytoscapeObject.on('zoom', handleZoom);
+
+    return () => {
+      cytoscapeObject.removeListener('zoom', handleZoom);
+    };
+  }, [cytoscapeObject]);
 
   const cyRef = useRef(null);
   const cyCallback = useCallback((cy) => {

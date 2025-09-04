@@ -44,12 +44,11 @@ export const iconToSvgDataUrl = (icon, color = '#000') => {
 };
 
 // Generate Cytoscape style for a node icon
-export const getNodeIconStyle = (iconDataUrl) => ({
+export const getNodeIconStyle = (iconDataUrl, iconSize) => ({
   'background-image': iconDataUrl,
   'background-fit': 'none',
-  'background-postion': 'center',
-  //   'background-position-x': '50%',
-  //   'background-position-y': '50%',
-  'background-width': '60%',
-  'background-height': '60%',
+  'background-position-x': '50%',
+  'background-position-y': '50%',
+  'background-width': `${iconSize}px`,
+  'background-height': `${iconSize}px`,
 });

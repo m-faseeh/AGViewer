@@ -20,7 +20,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import {
-  edgeLabelColors, edgeLabelSizes, nodeLabelColors, nodeLabelSizes,
+  edgeLabelColors, edgeLabelSizes, nodeLabelColors, nodeLabelSizes, updateIconStyle,
 } from '../../../features/cypher/CypherUtil';
 import CypherResultCytoscapeChart from '../../cytoscape/CypherResultCytoscapeChart';
 import CypherResultCytoscapeLegend from '../../cytoscape/CypherResultCytoscapeLegend';
@@ -175,6 +175,10 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
       setLegendData({ ...legendData, edgeLegend: edgeLegendObj });
     }
     dispatch(() => props.setLabels(elementType, label, { size }));
+    // Recalculate icon sizes after node resize
+    if (elementType === 'node') {
+      updateIconStyle(cytoscapeObject);
+    }
   };
 
   const changeCaptionOnCytoscapeElements = (elementType, label, caption) => {
