@@ -11,15 +11,15 @@
   ],
   "main": "electronApp.js",
   "scripts": {
-    "clean": "rimraf resources/backend/ resources/frontend/build",
+    "clean": "rimraf  dist resources/backend/ resources/frontend/build",
     "prebuild": "cd .. && npm run build-back && npm run build-front",
     "prebundle": "mkdirp resources/backend resources/frontend && cp -r ../backend/build resources/backend/ && cp -r ../backend/sql resources/backend/ && cp -r ../frontend/build resources/frontend/",
     "bundle:test": "yarn run clean && yarn run prebuild && yarn run prebundle && electron electronApp.js",
     "bundle:osx": "yarn run clean && yarn run prebuild && yarn run prebundle && electron-builder build --mac",
-    "bundle:linux": "yarn run clean && yarn run prebuild && yarn run prebundle && yarn run build:linux32 && yarn run build:linux64",
+    "bundle:linux": "yarn run clean && yarn run prebuild && yarn run prebundle && yarn run bundle:linux32 && yarn run bundle:linux64",
     "bundle:linux32": "yarn run clean && yarn run prebuild && yarn run prebundle && electron-builder build --linux --ia32",
     "bundle:linux64": "yarn run clean && yarn run prebuild && yarn run prebundle && electron-builder build --linux --x64",
-    "bundle:win": "yarn run clean && yarn run prebuild && yarn run prebundle && yarn run build:win32 && yarn run build:win64",
+    "bundle:win": "yarn run clean && yarn run prebuild && yarn run prebundle && yarn run bundle:win32 && yarn run bundle:win64",
     "bundle:win32": "yarn run clean && yarn run prebuild && yarn run prebundle && electron-builder build --win --ia32",
     "bundle:win64": "yarn run clean && yarn run prebuild && yarn run prebundle && electron-builder build --win --x64"
   },
@@ -33,7 +33,6 @@
     "debug": "~4.3.1",
     "dotenv": "^16.0.2",
     "ejs": "^3.1.6",
-    "electron": "^37.3.1",
     "express": "~4.17.1",
     "express-session": "^1.17.1",
     "http-status": "^1.5.0",
@@ -47,6 +46,7 @@
     "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
+    "electron": "^37.3.1",
     "cpy": "^11.1.0",
     "cpy-cli": "^5.0.0",
     "electron-builder": "^23.6.0",
@@ -73,7 +73,8 @@
     "mac": {
       "target": [
         "default"
-      ]
+      ],
+      "icon": "resources/installer/icons/mac/icon.icns"
     },
     "dmg": {
       "title": "age-viewer"
@@ -82,7 +83,8 @@
       "target": [
         "zip",
         "nsis"
-      ]
+      ],
+      "icon": "resources/installer/icons/win/icon.ico"
     },
     "linux": {
       "target": [
@@ -91,7 +93,8 @@
         "rpm",
         "zip",
         "tar.gz"
-      ]
+      ],
+      "icon": "resources/installer/icons/linux/icon.png"
     },
     "nsis": {
       "oneClick": false,
